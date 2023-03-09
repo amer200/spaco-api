@@ -37,7 +37,7 @@ exports.signUp = (req, res) => {
         .catch(err => {
             res.status(500).json({
                 msg: "server error",
-                error: err.msg
+                error: err.message
             })
         })
 }
@@ -64,9 +64,10 @@ exports.logIn = (req, res) => {
             }
         })
         .catch(err => {
+            console.log(err)
             res.status(500).json({
                 msg: "server error",
-                error: err.msg
+                error: err.message
             })
         })
 }

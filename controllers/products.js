@@ -11,7 +11,7 @@ exports.getAllProds = (req, res) => {
         .catch(err => {
             res.status(500).json({
                 msg: "server error",
-                error: err.msg
+                error: err.message
             })
         })
 }
@@ -33,7 +33,7 @@ exports.getProdsByCateg = (req, res) => {
         .catch(err => {
             res.status(500).json({
                 msg: "server error",
-                error: err.msg
+                error: err.message
             })
         })
 }
@@ -55,7 +55,7 @@ exports.getProdById = (req, res) => {
         .catch(err => {
             res.status(500).json({
                 msg: "server error",
-                error: err.msg
+                error: err.message
             })
         })
 }
@@ -66,7 +66,7 @@ exports.AddProd = (req, res) => {
     const details = req.body.details;
     const imgs = req.files;
     let imgsPath = [];
-    if (!imgs.path[0]) {
+    if (!imgs[0]) {
         return res.status(304).json({
             msg: "imgs is required",
         })
@@ -84,14 +84,21 @@ exports.AddProd = (req, res) => {
     })
     newProd.save()
         .then(p => {
-            res.status(200).json({
-                data: p
-            })
+            Categ.findOne({ name: category })
+                .then(c => {
+                    c.products.push(p)
+                    return c.save()
+                })
+                .then(c => {
+                    res.status(200).json({
+                        data: p
+                    })
+                })
         })
         .catch(err => {
             res.status(500).json({
                 msg: "server error",
-                error: err.msg
+                error: err
             })
         })
 }

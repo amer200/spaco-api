@@ -5,17 +5,103 @@
 url = http://localhost:5000/products/all
 method = GET
 
+response on success
 {
-    "data": []
+    "data": [
+        {
+            "_id": "64099489efc793f1a888d145",
+            "name": "prod1",
+            "category": "categ2",
+            "description": "dsasdas",
+            "imgs": [
+                "public/uploads/imgs-1678349449316-731477911.1.png",
+                "public/uploads/imgs-1678349449317-505418359.details.png",
+                "public/uploads/imgs-1678349449317-888310057.elmasa-logo.png"
+            ],
+            "details": [
+                {
+                    "title": "title1",
+                    "value": "value1",
+                    "_id": "64099489efc793f1a888d146"
+                }
+            ],
+            "__v": 0
+        },
+        {
+            "_id": "64099584efc793f1a888d14e",
+            "name": "prod1",
+            "category": "categ2",
+            "description": "dsasdas",
+            "imgs": [
+                "public/uploads/imgs-1678349700075-921195985.1.png",
+                "public/uploads/imgs-1678349700075-401705546.details.png",
+                "public/uploads/imgs-1678349700076-144046743.elmasa-logo.png"
+            ],
+            "details": [
+                {
+                    "title": "title1",
+                    "value": "value1",
+                    "_id": "64099584efc793f1a888d14f"
+                }
+            ],
+            "__v": 0
+        }
+    ]
 }
 /////////////////////////////
 2) get product by id
 url = http://localhost:5000/products/product-by-id/{id}
 method = GET
+response on success
+{
+    "data": {
+        "_id": "64099584efc793f1a888d14e",
+        "name": "prod1",
+        "category": "categ2",
+        "description": "dsasdas",
+        "imgs": [
+            "public/uploads/imgs-1678349700075-921195985.1.png",
+            "public/uploads/imgs-1678349700075-401705546.details.png",
+            "public/uploads/imgs-1678349700076-144046743.elmasa-logo.png"
+        ],
+        "details": [
+            {
+                "title": "title1",
+                "value": "value1",
+                "_id": "64099584efc793f1a888d14f"
+            }
+        ],
+        "__v": 0
+    }
+}
 ////////////////////////////
-3) getProducts By category   *(not finshed yet plz wait)
+3) getProducts By category   
 url = http://localhost:5000/products/product-by-category/{category name}
 method = GET
+response on success
+{
+    "data": [
+        {
+            "_id": "640998752b725325af3f4beb",
+            "name": "prod1",
+            "category": "categ2",
+            "description": "dsasdas",
+            "imgs": [
+                "public/uploads/imgs-1678350452874-33281486.1.png",
+                "public/uploads/imgs-1678350452875-673309418.details.png",
+                "public/uploads/imgs-1678350452879-247777535.elmasa-logo.png"
+            ],
+            "details": [
+                {
+                    "title": "title1",
+                    "value": "value1",
+                    "_id": "640998752b725325af3f4bec"
+                }
+            ],
+            "__v": 0
+        }
+    ]
+}
 //////////////////////////
 4) add product 
 
@@ -23,8 +109,41 @@ allowed only for suppliers and must be loged in
 
 url = http://localhost:5000/products/add-new
 method = POST
+body{
+    imgs: files 
+    name: String,
+    category: String,
+    description: String,
+    details: [
+        {
+            title: String,
+            value: String
+        }
+    ]
+}
 
-
+response on success
+{
+    "data": {
+        "name": "prod1",
+        "category": "categ2",
+        "description": "dsasdas",
+        "imgs": [
+            "public/uploads/imgs-1678349700075-921195985.1.png",
+            "public/uploads/imgs-1678349700075-401705546.details.png",
+            "public/uploads/imgs-1678349700076-144046743.elmasa-logo.png"
+        ],
+        "details": [
+            {
+                "title": "title1",
+                "value": "value1",
+                "_id": "64099584efc793f1a888d14f"
+            }
+        ],
+        "_id": "64099584efc793f1a888d14e",
+        "__v": 0
+    }
+}
 ////////////////////////////////////supplier///////////////////////////////
 
 1)signup
@@ -58,3 +177,43 @@ response on success
 {
     "msg": "ok"
 }
+
+3) logout
+url = http://localhost:5000/supplier/loout
+method = GET
+response on success
+{
+    msg: "ok"
+}
+////////////////////////////////////////////admin////////////////////////////
+1)login
+url = http://localhost:5000/admin/login
+method = POST
+body{
+    "password": type String,  plz add ADMINPASS=123 in .env just for test 
+}
+2) logout
+url = http://localhost:5000/admin/login
+method = GET
+response on success
+{
+    msg: "ok"
+}
+///////////////////////////////////////category////////////////////////////
+1)add category   only for admin
+uri = http://localhost:5000/admin/add-new-category
+method = POST
+
+body{
+    name: "String",
+    img: file
+}
+
+response on success
+  "category": {
+        "name": "categ4",
+        "products": [],
+        "img": "public/uploads/img-1678347615255-363244279.saee-logo.png",
+        "_id": "64098d5f090dc71a3afab24d",
+        "__v": 0
+    }

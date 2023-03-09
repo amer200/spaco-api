@@ -1,7 +1,6 @@
 const categ = require("../models/category");
 
-exports.isFind = (req, res) => {
-    console.log(req.body)
+exports.isFind = (req, res, next) => {
     const category = req.body.category;
     categ.findOne({ name: category })
         .then(c => {
@@ -9,14 +8,15 @@ exports.isFind = (req, res) => {
                 next()
             } else {
                 res.status(400).json({
-                    msg: "categore not found !"
+                    msg: "category not found !"
                 })
             }
         })
         .catch(err => {
+            console.log(err)
             res.status(500).json({
                 msg: "server error",
-                error: err.msg
+                error: err.message
             })
         })
 }
