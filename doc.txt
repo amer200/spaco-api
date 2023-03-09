@@ -5,6 +5,56 @@
 url = http://localhost:5000/products/all
 method = GET
 
+{
+    "data": []
+}
+/////////////////////////////
+2) get product by id
+url = http://localhost:5000/products/product-by-id/{id}
+method = GET
+////////////////////////////
+3) getProducts By category   *(not finshed yet plz wait)
+url = http://localhost:5000/products/product-by-category/{category name}
+method = GET
+//////////////////////////
+4) add product 
+
+allowed only for suppliers and must be loged in
+
+url = http://localhost:5000/products/add-new
+method = POST
 
 
+////////////////////////////////////supplier///////////////////////////////
 
+1)signup
+
+url = http://localhost:5000/supplier/signup
+method = POST
+body{
+    "name": type = String , required
+    "email": type = String , required,
+    "mobile": type = String , min length = 12 ,required , ex) 201152306375
+    "password": type= String, min length = 8, must contain 1 special & lower case & capital case, required  
+    "taxrecord": type = String, required
+    "address": type = String
+}
+response  on success
+status 200 
+"supplier": {
+    supplier data
+}
+
+
+2) login
+url = http://localhost:5000/supplier/login
+method = POST
+
+body{
+    email: required,
+    password: required
+}
+response on success
+{
+    "msg": "ok"
+}

@@ -62,13 +62,36 @@ exports.getProdById = (req, res) => {
 exports.AddProd = (req, res) => {
     const name = req.body.name;
     const category = req.body.category;
-    const supplier = req.body.supplier;
     const description = req.body.description;
     const details = req.body.details;
     const imgs = req.files;
     let imgsPath = [];
+    if (!imgs.path[0]) {
+        return res.status(304).json({
+            msg: "imgs is required",
+        })
+    }
     imgs.forEach(i => {
-        imgsPath.push(i)
+        imgsPath.push(i.path)
     });
-    
+    const newProd = new Prod({
+        name: name,
+        category: category,
+        supplier: req.session.supplier,
+        description: description,
+        details: details,
+        imgs: imgsPath
+    })
+    newProd.save()
+        .then(p => {
+            res.status(200).json({
+                data: p
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                msg: "server error",
+                error: err.msg
+            })
+        })
 }

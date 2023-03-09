@@ -5,6 +5,7 @@ const userShema = mongoose.Shema({
     password: String,
     email: String,
     mobile: String,
+    address: String,
     orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
     status: Boolean
 })
