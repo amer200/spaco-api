@@ -15,8 +15,7 @@ app.use(bodyParser.json());
 
 // const adminRoutes = require('./routes/admin');
 const productRoutes = require('./routes/product');
-app.use('/students', mainRoutes);
-app.use('/product', adminRoutes);
+app.use('/products', productRoutes);
 /********************************************************************************* */
 mongoose.connect(dbUrl)
     .then(resu => {
