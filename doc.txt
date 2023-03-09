@@ -1,0 +1,10 @@
+//////////////////////////////////////prducts////////////////////////////
+
+1) get all product
+
+url = http://localhost:5000/products/all
+method = GET
+
+
+
+
