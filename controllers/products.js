@@ -74,6 +74,7 @@ exports.AddProd = (req, res) => {
     imgs.forEach(i => {
         imgsPath.push(i.path)
     });
+    console.log(req.user)
     const newProd = new Prod({
         name: name,
         category: category,
