@@ -77,7 +77,7 @@ exports.AddProd = (req, res) => {
     const newProd = new Prod({
         name: name,
         category: category,
-        supplier: req.session.supplier,
+        supplier: req.user.id,
         description: description,
         details: details,
         imgs: imgsPath

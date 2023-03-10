@@ -1,5 +1,7 @@
 const Supplier = require('../models/supplier');
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const { use } = require('../routes/product');
 const salt = 10;
 exports.signUp = (req, res) => {
     const name = req.body.name;
@@ -49,8 +51,15 @@ exports.logIn = (req, res) => {
             if (s) {
                 if (bcrypt.compareSync(password, s.password)) {
                     req.session.supplier = s._id;
+                    const user = {
+                        id: s._id,
+                        name: s.name,
+                        roll: "supplier"
+                    }
+                    const token = jwt.sign({ user: user }, process.env.ACCESS_TOKEN);
                     res.status(200).json({
-                        msg: "ok"
+                        msg: "ok",
+                        token: token
                     })
                 } else {
                     res.status(400).json({

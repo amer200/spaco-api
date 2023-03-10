@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const dbUrl = process.env.DB_URL;
 const port = process.env.PORT;
 const multer = require('multer');
+const jwt = require("jsonwebtoken");
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 var cors = require('cors');

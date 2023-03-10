@@ -108,6 +108,8 @@ response on success
 allowed only for suppliers and must be loged in
 
 url = http://localhost:5000/products/add-new
+header 
+authorization = Bearer + token
 method = POST
 body{
     imgs: files 
@@ -175,7 +177,8 @@ body{
 }
 response on success
 {
-    "msg": "ok"
+    "msg": "ok",
+    "token": ""
 }
 
 3) logout
