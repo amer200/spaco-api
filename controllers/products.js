@@ -103,3 +103,17 @@ exports.AddProd = (req, res) => {
             })
         })
 }
+exports.getCategs = (req, res) => {
+    Categ.find({}, 'name , img')
+        .then(c => {
+            res.status(200).json({
+                data: c
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                msg: "server error",
+                error: err
+            })
+        })
+}

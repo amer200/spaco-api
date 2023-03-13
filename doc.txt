@@ -220,3 +220,19 @@ response on success
         "_id": "64098d5f090dc71a3afab24d",
         "__v": 0
     }
+
+2) get all categiory
+url = http://localhost:5000/products/categs
+method = GET
+response on success
+"data": [
+        {
+            "_id": "64098a4e494d6ed6dde769bf",
+            "name": "categ1",
+            "img": "public/uploads/img-1678346830319-951295145.saee-logo.png"
+        },
+        {
+            "_id": "64098d1702aeae9a660fa5be",
+            "name": "categ2",
+            "img": "public/uploads/img-1678347543190-478814718.saee-logo.png"
+        }]
