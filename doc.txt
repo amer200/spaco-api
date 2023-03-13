@@ -2,7 +2,7 @@
 
 1) get all product
 
-url = http://localhost:5000/products/all
+url = http://linkloop.co:5000/products/all
 method = GET
 
 response on success
@@ -50,7 +50,7 @@ response on success
 }
 /////////////////////////////
 2) get product by id
-url = http://localhost:5000/products/product-by-id/{id}
+url = http://linkloop.co:5000/products/product-by-id/{id}
 method = GET
 response on success
 {
@@ -76,7 +76,7 @@ response on success
 }
 ////////////////////////////
 3) getProducts By category   
-url = http://localhost:5000/products/product-by-category/{category name}
+url = http://linkloop.co:5000/products/product-by-category/{category name}
 method = GET
 response on success
 {
@@ -107,7 +107,7 @@ response on success
 
 allowed only for suppliers and must be loged in
 
-url = http://localhost:5000/products/add-new
+url = http://linkloop.co:5000/products/add-new
 header 
 authorization = Bearer + token
 method = POST
@@ -150,7 +150,7 @@ response on success
 
 1)signup
 
-url = http://localhost:5000/supplier/signup
+url = http://linkloop.co:5000/supplier/signup
 method = POST
 body{
     "name": type = String , required
@@ -168,7 +168,7 @@ status 200
 
 
 2) login
-url = http://localhost:5000/supplier/login
+url = http://linkloop.co:5000/supplier/login
 method = POST
 
 body{
@@ -182,7 +182,7 @@ response on success
 }
 
 3) logout
-url = http://localhost:5000/supplier/loout
+url = http://linkloop.co:5000/supplier/loout
 method = GET
 response on success
 {
@@ -190,13 +190,13 @@ response on success
 }
 ////////////////////////////////////////////admin////////////////////////////
 1)login
-url = http://localhost:5000/admin/login
+url = http://linkloop.co:5000/admin/login
 method = POST
 body{
     "password": type String,  plz add ADMINPASS=123 in .env just for test 
 }
 2) logout
-url = http://localhost:5000/admin/login
+url = http://linkloop.co:5000/admin/login
 method = GET
 response on success
 {
@@ -204,7 +204,7 @@ response on success
 }
 ///////////////////////////////////////category////////////////////////////
 1)add category   only for admin
-uri = http://localhost:5000/admin/add-new-category
+uri = http://linkloop.co:5000/admin/add-new-category
 method = POST
 
 body{
@@ -222,7 +222,7 @@ response on success
     }
 
 2) get all categiory
-url = http://localhost:5000/products/categs
+url = http://linkloop.co:5000/products/categs
 method = GET
 response on success
 "data": [
