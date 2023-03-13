@@ -8,4 +8,6 @@ routes.get('/all', prodController.getAllProds);
 routes.get('/product-by-id/:id', prodController.getProdById);
 routes.get('/product-by-category/:name', prodController.getProdsByCateg);
 routes.post('/add-new', supplierMiddlewares.isAuth, categMiddlewares.isFind, prodMiddlewares.isValide, prodController.AddProd);
+routes.get('/categs', prodController.getCategs);
+
 module.exports = routes
