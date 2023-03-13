@@ -10,9 +10,9 @@ const jwt = require("jsonwebtoken");
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 var cors = require('cors');
-// app.use(cors({
-//     origin: "*"
-// }))
+app.use(cors({
+    origin: false
+}))
 /********************************************************************************* */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
