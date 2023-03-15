@@ -30,6 +30,7 @@ exports.logOut = async (req, res) => {
 exports.addCateg = (req, res) => {
     const name = req.body.name;
     const img = req.file;
+    console.log(req.files)
     if (!name || typeof name != "string" || name.length < 4) {
         return res.status(400).json({
             msg: "category name is requires , must be typeof string and lenth > 4"
