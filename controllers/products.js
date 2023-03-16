@@ -64,7 +64,7 @@ exports.AddProd = (req, res) => {
 
     let details = []
     for (let i in d) {
-        details.push({ title: i, value: details[i] })
+        details.push({ title: i, value: d[i] })
     }
 
     // const name = req.body.name;
