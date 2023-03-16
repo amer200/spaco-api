@@ -60,11 +60,22 @@ exports.getProdById = (req, res) => {
         })
 }
 exports.AddProd = (req, res) => {
-    const name = req.body.name;
-    const category = req.body.category;
-    const description = req.body.description;
-    const details = req.body.details;
+    const { name, category, description, ...details } = req.body
+
+    let d = []
+    for (let i in details) {
+        d.push({ title: i, value: details[i] })
+    }
+    body.details = d
+
+    // const name = req.body.name;
+    // const category = req.body.category;
+    // const description = req.body.description;
+    // const details = req.body.details;
+
     const imgs = req.files;
+
+
     let imgsPath = [];
     if (!imgs[0]) {
         return res.status(304).json({
