@@ -60,13 +60,12 @@ exports.getProdById = (req, res) => {
         })
 }
 exports.AddProd = (req, res) => {
-    const { name, category, description, ...details } = req.body
+    const { name, category, description, ...d } = req.body
 
-    let d = []
-    for (let i in details) {
-        d.push({ title: i, value: details[i] })
+    let details = []
+    for (let i in d) {
+        details.push({ title: i, value: details[i] })
     }
-    req.body.details = d
 
     // const name = req.body.name;
     // const category = req.body.category;
