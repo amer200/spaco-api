@@ -146,6 +146,59 @@ response on success
         "__v": 0
     }
 }
+//////////////////////////
+5) edit product  (allowed only for suppliers and must be loged in)
+url = http://linkloop.co:5000/products/edit-prod/{productId}
+method = post
+body{
+    imgs: files // if add new img
+    name: String,
+    category: String,
+    description: String,
+    details: [
+        {
+            title: String,
+            value: String
+        }
+    ]
+}
+
+response on success
+{
+    "data": {
+        "name": "prod1",
+        "category": "categ2",
+        "description": "dsasdas",
+        "imgs": [
+            "public/uploads/imgs-1678349700075-921195985.1.png",
+            "public/uploads/imgs-1678349700075-401705546.details.png",
+            "public/uploads/imgs-1678349700076-144046743.elmasa-logo.png"
+        ],
+        "details": [
+            {
+                "title": "title1",
+                "value": "value1",
+                "_id": "64099584efc793f1a888d14f"
+            }
+        ],
+        "_id": "64099584efc793f1a888d14e",
+        "__v": 0
+    }
+}
+/////////////////////////
+6) remove product imgs
+url = http://linkloop.co:5000/products/remove-img/
+method = post
+body 
+{
+    "img": "public/uploads/imgs-1678457484179-71316788.1.png"
+}
+response 
+{
+    "imgs": [
+        "public/uploads/imgs-1678457484179-71316788.2.png"
+    ]
+}
 ////////////////////////////////////supplier///////////////////////////////
 
 1)signup
