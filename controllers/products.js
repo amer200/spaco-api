@@ -1,6 +1,6 @@
 const Prod = require('../models/product');
 const Categ = require('../models/category');
-
+const fs = require("fs");
 exports.getAllProds = (req, res) => {
     Prod.find().populate('category')
         .then(prods => {
@@ -111,6 +111,93 @@ exports.AddProd = (req, res) => {
             res.status(500).json({
                 msg: "server error",
                 error: err
+            })
+        })
+}
+exports.getCategs = (req, res) => {
+    Categ.find({}, 'name , img')
+        .then(c => {
+            res.status(200).json({
+                data: c
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                msg: "server error",
+                error: err
+            })
+        })
+}
+exports.EditProd = (req, res) => {
+    const name = req.body.name;
+    const category = req.body.category;
+    const description = req.body.description;
+    const details = req.body.details;
+    const prodId = req.params.pid;
+    const supId = req.user.id;
+    const newImgs = req.files;
+    Prod.findOne({ _id: prodId, supplier: supId })
+        .then(p => {
+            if (p) {
+                p.name = name;
+                p.category = category;
+                p.description = description;
+                p.details = details;
+                if (newImgs[0]) {
+                    newImgs.forEach(i => {
+                        p.imgs.push(i.path);
+                    })
+                }
+                return p.save()
+            } else {
+                return false;
+            }
+        })
+        .then(result => {
+            if (result) {
+                res.status(200).json({
+                    product: result
+                })
+            } else {
+                res.status(400).json({
+                    msg: "product not found (product id or supplier id wrong)"
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
+        })
+}
+exports.removeImg = (req, res) => {
+    const prodId = req.params.pid;
+    const img = req.body.img;
+    const supId = req.user.id;
+    Prod.findOne({ _id: prodId, supplier: supId })
+        .then(p => {
+            if (p) {
+                const newImgs = p.imgs.filter(i => {
+                    return i != img
+                })
+                p.imgs = newImgs
+                p.save()
+                    .then(p => {
+                        res.status(200).json({
+                            imgs: p.imgs
+                        })
+                    })
+            } else {
+                res.status(400).json({
+                    msg: "product not found (product id or supplier id wrong)"
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
             })
         })
 }
