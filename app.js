@@ -24,6 +24,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 app.post('/admin/add-new-category', upload.single('img'));
 app.post("/products/add-new", upload.array('imgs'));
+app.post("/products/edit-prod/:pid", upload.array('imgs'));
 /********************************************************************************** */
 const store = new MongoDBStore({
     uri: dbUrl,
