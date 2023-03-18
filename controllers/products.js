@@ -64,13 +64,8 @@ exports.AddProd = (req, res) => {
 
     let details = []
     for (let i in d) {
-        details.push({ title: i, value: d[i] })
+        details.push({ title: decodeURI(i), value: d[i] })
     }
-
-    // const name = req.body.name;
-    // const category = req.body.category;
-    // const description = req.body.description;
-    // const details = req.body.details;
 
     const imgs = req.files;
 
