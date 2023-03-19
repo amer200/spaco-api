@@ -1,36 +1,35 @@
-const Supplier = require('../models/supplier');
+const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const salt = 10;
+
 exports.signUp = (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
-    const taxrecord = req.body.taxrecord;
     const mobile = req.body.mobile;
     const address = req.body.address;
     const password = req.body.password;
     const hash = bcrypt.hashSync(password, salt);
     const status = 0;
-    Supplier.findOne({ email: email })
-        .then(s => {
-            if (s) {
+    User.findOne({ email: email })
+        .then(u => {
+            if (u) {
                 res.status(400).json({
                     msg: 'this email is used before'
                 })
             } else {
-                const newSupplier = new Supplier({
+                const newUser = new User({
                     name: name,
                     email: email,
-                    taxrecord: taxrecord,
                     mobile: mobile,
                     password: hash,
                     address: address,
                     status: status
                 })
-                newSupplier.save()
-                    .then(s => {
+                newUser.save()
+                    .then(u => {
                         res.status(200).json({
-                            supplier: s
+                            user: u
                         })
                     })
             }
@@ -45,15 +44,15 @@ exports.signUp = (req, res) => {
 exports.logIn = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    Supplier.findOne({ email: email })
-        .then(s => {
-            if (s) {
-                if (bcrypt.compareSync(password, s.password)) {
-                    req.session.supplier = s._id;
+    User.findOne({ email: email })
+        .then(u => {
+            if (u) {
+                if (bcrypt.compareSync(password, u.password)) {
+                    req.session.user = u._id;
                     const user = {
-                        id: s._id,
-                        name: s.name,
-                        roll: "supplier"
+                        id: u._id,
+                        name: u.name,
+                        roll: "user"
                     }
                     const token = jwt.sign({ user: user }, process.env.ACCESS_TOKEN);
                     res.status(200).json({
