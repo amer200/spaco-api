@@ -1,3 +1,4 @@
+const { number } = require('joi');
 const mongoose = require('mongoose');
 
 const userShema = mongoose.Schema({
@@ -6,7 +7,7 @@ const userShema = mongoose.Schema({
     email: String,
     mobile: String,
     address: String,
-    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
     status: Boolean
 })
 

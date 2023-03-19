@@ -1,5 +1,6 @@
 const Prod = require('../models/product');
 const Categ = require('../models/category');
+const User = require('../models/user');
 const fs = require("fs");
 exports.getAllProds = (req, res) => {
     Prod.find().populate('category')
