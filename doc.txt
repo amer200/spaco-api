@@ -321,3 +321,25 @@ response on success
     "msg": "ok",
     "token": ""
 }
+////////////////////////////////////////////////orders//////////////////////////////
+1) addnew  only for user
+url = http://linkloop.co:5000/order/add-new
+method = post
+body
+{
+    "product": product id,
+    "quantity": number  integer
+}
+response
+{
+    "order": {
+        "prod": prod _id,
+        "quantity": 4,
+        "supplier": supplier _id,
+        "user": user _id,
+        "supplerresponse": false,
+        "userresponse": false,
+        "_id": "641700fc65e01555fd9efc5c",
+        "__v": 0
+    }
+}
