@@ -61,13 +61,10 @@ exports.getProdById = (req, res) => {
 }
 exports.AddProd = (req, res) => {
     const { name, category, description, ...d } = req.body
-
+    console.log(d)
     let details = []
-    // for (let i in d) {
-    //     details.push({ title: decodeURI(i), value: d[i] })
-    // }
-    for (let i = 0; i < (d.length / 2); i++) {
-        details.push({ title: d[`title${i}`], value: d[`value${i}`] })
+    for (let i of d) {
+        details.push(i)
     }
 
     const imgs = req.files;
