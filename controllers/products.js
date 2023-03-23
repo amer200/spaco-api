@@ -64,8 +64,8 @@ exports.AddProd = (req, res) => {
     const { name, category, description, ...d } = req.body
     console.log(d)
     let details = []
-    for (let i of d) {
-        details.push(i)
+    for (let i in d) {
+        details.push(d[i])
     }
 
     const imgs = req.files;
