@@ -11,7 +11,6 @@ const productSchema = mongoose.Schema({
             value: String
         }
     ],
-    supplier: { type: mongoose.Schema.Types.ObjectId, ref: 'Supplier' }
 })
 
 module.exports = mongoose.model('Product', productSchema);
