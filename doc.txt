@@ -199,6 +199,7 @@ response
         "public/uploads/imgs-1678457484179-71316788.2.png"
     ]
 }
+////////////////////////
 ////////////////////////////////////supplier///////////////////////////////
 
 1)signup
@@ -289,3 +290,56 @@ response on success
             "name": "categ2",
             "img": "public/uploads/img-1678347543190-478814718.saee-logo.png"
         }]
+
+/////////////////////////////////////////user/////////////////////////////////
+1)signUp
+url = http://linkloop.co:5000/user/signup
+method = post
+body{
+    "name": type = String , required
+    "email": type = String , required,
+    "mobile": type = String , min length = 12 ,required , ex) 201152306375
+    "password": type= String, min length = 8, must contain 1 special & lower case & capital case, required  
+    "address": type = String
+}
+response  on success
+status 200 
+"supplier": {
+    supplier data
+}
+//////////////
+2)login
+url = http://linkloop.co:5000/user/login
+method = POST
+
+body{
+    email: required,
+    password: required
+}
+response on success
+{
+    "msg": "ok",
+    "token": ""
+}
+////////////////////////////////////////////////orders//////////////////////////////
+1) addnew  only for user
+url = http://linkloop.co:5000/order/add-new
+method = post
+body
+{
+    "product": product id,
+    "quantity": number  integer
+}
+response
+{
+    "order": {
+        "prod": prod _id,
+        "quantity": 4,
+        "supplier": supplier _id,
+        "user": user _id,
+        "supplerresponse": false,
+        "userresponse": false,
+        "_id": "641700fc65e01555fd9efc5c",
+        "__v": 0
+    }
+}

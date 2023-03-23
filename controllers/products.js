@@ -1,5 +1,6 @@
 const Prod = require('../models/product');
 const Categ = require('../models/category');
+const User = require('../models/user');
 const fs = require("fs");
 exports.getAllProds = (req, res) => {
     Prod.find().populate('category')
@@ -83,7 +84,6 @@ exports.AddProd = (req, res) => {
     const newProd = new Prod({
         name: name,
         category: category,
-        supplier: req.user.id,
         description: description,
         details: details,
         imgs: imgsPath

@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-const userShema = mongoose.Shema({
+const userShema = mongoose.Schema({
     name: String,
     password: String,
     email: String,
     mobile: String,
     address: String,
-    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+    orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }],
     status: Boolean
 })
 
