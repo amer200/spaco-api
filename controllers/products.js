@@ -128,9 +128,8 @@ exports.EditProd = (req, res) => {
     const description = req.body.description;
     const details = req.body.details;
     const prodId = req.params.pid;
-    const supId = req.user.id;
     const newImgs = req.files;
-    Prod.findOne({ _id: prodId, supplier: supId })
+    Prod.findOne({ _id: prodId })
         .then(p => {
             if (p) {
                 p.name = name;
@@ -154,7 +153,7 @@ exports.EditProd = (req, res) => {
                 })
             } else {
                 res.status(400).json({
-                    msg: "product not found (product id or supplier id wrong)"
+                    msg: "product not found"
                 })
             }
         })
@@ -168,8 +167,7 @@ exports.EditProd = (req, res) => {
 exports.removeImg = (req, res) => {
     const prodId = req.params.pid;
     const img = req.body.img;
-    const supId = req.user.id;
-    Prod.findOne({ _id: prodId, supplier: supId })
+    Prod.findOne({ _id: prodId })
         .then(p => {
             if (p) {
                 const newImgs = p.imgs.filter(i => {
@@ -184,7 +182,7 @@ exports.removeImg = (req, res) => {
                     })
             } else {
                 res.status(400).json({
-                    msg: "product not found (product id or supplier id wrong)"
+                    msg: "product not found"
                 })
             }
         })

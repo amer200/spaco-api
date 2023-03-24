@@ -1,4 +1,5 @@
 const Supplier = require('../models/supplier');
+const Prod = require('../models/product');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const salt = 10;
@@ -70,6 +71,27 @@ exports.logIn = (req, res) => {
                     msg: "wrong password or email"
                 })
             }
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
+        })
+}
+exports.addProd = (req, res) => {
+    const prodId = req.body.id;
+    const supId = req.user.id;
+    Supplier.findById(supId)
+        .then(s => {
+            s.prods.push(prodId);
+            return s.save()
+        })
+        .then(s => {
+            res.status(200).json({
+                msg: "ok"
+            })
         })
         .catch(err => {
             console.log(err)
