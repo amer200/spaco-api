@@ -21,9 +21,15 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + uniqueSuffix)
     }
 });
+/********************************************************************************* */
+app.use(express.static('public'));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }))
+/********************************************************************************* */
 const upload = multer({ storage: storage });
 app.post('/admin/add-new-category', upload.single('img'));
-app.post("/products/add-new", upload.array('imgs'));
+app.post("/products/add-img/:id", upload.single('imgs'));
 app.post("/products/edit-prod/:pid", upload.array('imgs'));
 /********************************************************************************** */
 const store = new MongoDBStore({
@@ -37,22 +43,17 @@ app.use(session({
     store: store
 }))
 /********************************************************************************* */
-app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
-/********************************************************************************* */
 
-// const adminRoutes = require('./routes/admin');
 const productRoutes = require('./routes/product');
 const supplierRoutes = require('./routes/supplier');
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
-const orderRouts = require('./routes/order');
+const orderRoutes = require('./routes/order');
 app.use('/products', productRoutes);
 app.use('/supplier', supplierRoutes);
 app.use('/admin', adminRoutes);
 app.use('/user', userRoutes);
-app.use('/order', orderRouts);
+app.use('/order', orderRoutes);
 /********************************************************************************* */
 mongoose.connect(dbUrl)
     .then(resu => {

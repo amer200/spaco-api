@@ -80,12 +80,35 @@ exports.logIn = (req, res) => {
             })
         })
 }
-exports.addProd = (req, res) => {
+exports.addProds = (req, res) => {
+    const prodId = req.body.ids;
+    const supId = req.user.id;
+    Supplier.findById(supId)
+        .then(s => {
+            s.prods.push(...prodId);
+            return s.save()
+        })
+        .then(s => {
+            res.status(200).json({
+                msg: "ok"
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
+        })
+}
+exports.removeProd = (req, res) => {
     const prodId = req.body.id;
     const supId = req.user.id;
     Supplier.findById(supId)
         .then(s => {
-            s.prods.push(prodId);
+            s.prods = s.prods.filter(p => {
+                return p != prodId
+            })
             return s.save()
         })
         .then(s => {

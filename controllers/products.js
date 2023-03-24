@@ -62,31 +62,15 @@ exports.getProdById = (req, res) => {
 }
 exports.AddProd = (req, res) => {
     const { name, category, description, ...d } = req.body
-    console.log(d)
     let details = []
     for (let i in d) {
         details.push(d[i])
     }
-
-    const imgs = req.files;
-
-
-    let imgsPath = [];
-    if (!imgs[0]) {
-        return res.status(304).json({
-            msg: "imgs is required",
-        })
-    }
-    imgs.forEach(i => {
-        imgsPath.push(i.path)
-    });
-    console.log(req.user)
     const newProd = new Prod({
         name: name,
         category: category,
         description: description,
         details: details,
-        imgs: imgsPath
     })
     newProd.save()
         .then(p => {
@@ -108,6 +92,37 @@ exports.AddProd = (req, res) => {
             })
         })
 }
+exports.addImg = (req, res) => {
+    const prodId = req.params.id;
+    const imgs = req.files;
+    console.log(req)
+    const imgsPath = [];
+    if (!imgs[0]) {
+        res.status(400).json({
+            msg: "err imgs not found"
+        })
+    }
+    imgs.forEach(i => {
+        imgsPath.push(i.path);
+    })
+    Prod.findById(prodId)
+        .then(p => {
+            p.imgs.push(...imgsPath);
+            return p.save()
+        })
+        .then(p => {
+            res.status(200).json({
+                msg: "ok",
+                p: p
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
+        })
+}
 exports.getCategs = (req, res) => {
     Categ.find({}, 'name , img')
         .then(c => {
@@ -118,7 +133,7 @@ exports.getCategs = (req, res) => {
         .catch(err => {
             res.status(500).json({
                 msg: "server error",
-                error: err
+                error: err.message
             })
         })
 }

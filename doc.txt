@@ -242,6 +242,30 @@ response on success
 {
     msg: "ok"
 }
+////////////////
+4)add Products
+uri = http://linkloop.co:5000/supplier/add-prods
+method = post
+body
+{
+    ids: ["prodId"]
+}
+response
+{
+    "msg": "ok"
+}
+////////////////
+5)remove Product
+uri = http://linkloop.co:5000/supplier/remove-prod
+method = post
+body
+{
+    ids: "prodId"
+}
+response
+{
+    "msg": "ok"
+}
 ////////////////////////////////////////////admin////////////////////////////
 1)login
 url = http://linkloop.co:5000/admin/login
