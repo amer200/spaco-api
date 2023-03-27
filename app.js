@@ -23,9 +23,8 @@ const storage = multer.diskStorage({
 });
 /********************************************************************************* */
 app.use(express.static('public'));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded());
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 /********************************************************************************* */
 const upload = multer({ storage: storage });
 app.post('/admin/add-new-category', upload.single('img'));
