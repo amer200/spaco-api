@@ -21,14 +21,11 @@ const storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + uniqueSuffix)
     }
 });
-/********************************************************************************* */
-app.use(express.static('public'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+
 /********************************************************************************* */
 const upload = multer({ storage: storage });
 app.post('/admin/add-new-category', upload.single('img'));
-app.post("/products/add-img/:id", upload.single('imgs'));
+app.post("/products/add-img/:id", upload.array('imgs'));
 app.post("/products/edit-prod/:pid", upload.array('imgs'));
 /********************************************************************************** */
 const store = new MongoDBStore({
@@ -41,6 +38,10 @@ app.use(session({
     saveUninitialized: true,
     store: store
 }))
+/********************************************************************************* */
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 /********************************************************************************* */
 
 const productRoutes = require('./routes/product');

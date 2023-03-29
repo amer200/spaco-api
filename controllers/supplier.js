@@ -81,11 +81,11 @@ exports.logIn = (req, res) => {
         })
 }
 exports.addProds = (req, res) => {
-    const prodId = req.body.ids;
+    const prodId = req.body.id;
     const supId = req.user.id;
     Supplier.findById(supId)
         .then(s => {
-            s.prods.push(...prodId);
+            s.prods.push(prodId);
             return s.save()
         })
         .then(s => {

@@ -95,7 +95,7 @@ exports.AddProd = (req, res) => {
 exports.addImg = (req, res) => {
     const prodId = req.params.id;
     const imgs = req.files;
-    console.log(req)
+    console.log(req.files)
     const imgsPath = [];
     if (!imgs[0]) {
         res.status(400).json({
