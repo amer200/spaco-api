@@ -67,7 +67,7 @@ exports.AddProd = (req, res) => {
         name: name,
         category: category,
         description: description,
-        details: details,
+        details: details
     })
     newProd.save()
         .then(p => {
@@ -135,12 +135,13 @@ exports.getCategs = (req, res) => {
         })
 }
 exports.EditProd = (req, res) => {
-    const name = req.body.name;
-    const category = req.body.category;
-    const description = req.body.description;
-    const details = req.body.details;
-    const prodId = req.params.pid;
-    const newImgs = req.files;
+    const { name, category, description, details } = req.body
+    // const name = req.body.name;
+    // const category = req.body.category;
+    // const description = req.body.description;
+    // const details = req.body.details;
+    // const prodId = req.params.pid;
+    // const newImgs = req.files;
     Prod.findOne({ _id: prodId })
         .then(p => {
             if (p) {
@@ -148,11 +149,11 @@ exports.EditProd = (req, res) => {
                 p.category = category;
                 p.description = description;
                 p.details = details;
-                if (newImgs[0]) {
-                    newImgs.forEach(i => {
-                        p.imgs.push(i.path);
-                    })
-                }
+                // if (newImgs[0]) {
+                //     newImgs.forEach(i => {
+                //         p.imgs.push(i.path);
+                //     })
+                // }
                 return p.save()
             } else {
                 return false;
