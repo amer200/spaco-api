@@ -48,12 +48,12 @@ const productRoutes = require('./routes/product');
 const supplierRoutes = require('./routes/supplier');
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
-const orderRoutes = require('./routes/order');
+const billRoutes = require('./routes/bill');
 app.use('/products', productRoutes);
 app.use('/supplier', supplierRoutes);
 app.use('/admin', adminRoutes);
 app.use('/user', userRoutes);
-app.use('/order', orderRoutes);
+app.use('/bill', billRoutes);
 /********************************************************************************* */
 mongoose.connect(dbUrl)
     .then(resu => {
