@@ -89,6 +89,13 @@ exports.addProds = (req, res) => {
             return s.save()
         })
         .then(s => {
+            return Prod.findById(prodId);
+        })
+        .then(p => {
+            p.suppliers.push(supId);
+            return p.save()
+        })
+        .then(resu=>{
             res.status(200).json({
                 msg: "ok"
             })

@@ -6,11 +6,26 @@ const Prod = require("../models/product");
 exports.addNew = async (req, res) => {
     const userId = req.user.id;
     const prods = req.body.prods;
+    /*
+    [
+        {
+            prod: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+            quantaty: Number,
+        }
+    ]
+    */
     const user = await User.findById(userId);
+    let suppliers = [];
     const newBill = new Bill({
         prods: prods,
         user: user._id
     })
+    await newBill.save();
+    const supplers = async () => {
+        await prods.forEach(p => {
+            Prod.findById(p.prod)
+        });
+    }
 }
 // exports.addOrder = async (req, res) => {
 //     try {

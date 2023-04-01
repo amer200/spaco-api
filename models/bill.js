@@ -5,7 +5,12 @@ const billSchema = mongoose.Schema({
         {
             prod: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
             quantaty: Number,
-            price: Number
+            suppliers: [
+                {
+                    id: { type: mongoose.Schema.Types.ObjectId, ref: 'Supplier' },
+                    price: Number
+                }
+            ]
         }
     ],
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }

@@ -137,7 +137,6 @@ exports.getCategs = (req, res) => {
 exports.EditProd = (req, res) => {
     const prodId = req.params.pid;
     const { name, category, description, details } = req.body
-    console.log(prodId)
     Prod.findById(prodId)
         .then(p => {
             if (p) {
