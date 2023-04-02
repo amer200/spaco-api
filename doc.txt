@@ -200,6 +200,13 @@ response
     ]
 }
 ////////////////////////
+7) remove product
+url = http://linkloop.co:5000/products/remove-prod/:id
+method = get
+response 
+{
+    msg: "ok"
+}
 ////////////////////////////////////supplier///////////////////////////////
 
 1)signup
@@ -265,6 +272,36 @@ body
 response
 {
     "msg": "ok"
+}
+////////////////
+6) get all products
+url = http://linkloop.co:5000/supplier/all-products
+method = get
+response
+{
+    "products": [
+        {
+            "supplers": [],
+            "_id": "6409952cefc793f1a888d14a",
+            "category": "categ2",
+            "description": "dsasdas",
+            "imgs": [
+                "public/uploads/imgs-1678349611867-874867170.1.png",
+                "public/uploads/imgs-1678349611867-246518852.details.png",
+                "public/uploads/imgs-1678349611868-838553812.elmasa-logo.png",
+                "public/uploads/imgs-1680121765753-730603864.1.png",
+                "public/uploads/imgs-1680121781081-203591709.1.png"
+            ],
+            "details": [
+                {
+                    "title": "title1",
+                    "value": "value1",
+                    "_id": "6409952cefc793f1a888d14b"
+                }
+            ],
+            "__v": 2
+        }
+    ]
 }
 ////////////////////////////////////////////admin////////////////////////////
 1)login

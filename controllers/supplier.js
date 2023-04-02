@@ -95,7 +95,7 @@ exports.addProds = (req, res) => {
             p.suppliers.push(supId);
             return p.save()
         })
-        .then(resu=>{
+        .then(resu => {
             res.status(200).json({
                 msg: "ok"
             })
@@ -119,8 +119,33 @@ exports.removeProd = (req, res) => {
             return s.save()
         })
         .then(s => {
+            return Prod.findById(prodId)
+        })
+        .then(p => {
+            p.supplers = p.supplers.filter(s => {
+                return s != supId
+            })
+            return p.save();
+        })
+        .then(s => {
             res.status(200).json({
                 msg: "ok"
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
+        })
+}
+exports.getProds = (req, res) => {
+    const supId = req.user.id;
+    Supplier.findById(supId).populate("prods")
+        .then(s => {
+            res.status(200).json({
+                products: s.prods
             })
         })
         .catch(err => {

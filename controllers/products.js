@@ -197,3 +197,19 @@ exports.removeImg = (req, res) => {
             })
         })
 }
+exports.removeProd = (req, res) => {
+    const prodId = req.params.id;
+    Prod.findByIdAndRemove(prodId)
+        .then(p => {
+            res.status(200).json({
+                msg: "ok"
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
+        })
+}

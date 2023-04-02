@@ -6,4 +6,5 @@ routes.post('/signup', supplierMiddlewares.isValide, supplierControllers.signUp)
 routes.post('/login', supplierControllers.logIn);
 routes.post('/add-prods', supplierMiddlewares.isAuth, supplierControllers.addProds);
 routes.post('/remove-prod', supplierMiddlewares.isAuth, supplierControllers.removeProd);
+routes.get('/all-products', supplierMiddlewares.isAuth, supplierControllers.getProds);
 module.exports = routes;
