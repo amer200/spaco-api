@@ -21,7 +21,7 @@ exports.addNew = async (req, res) => {
         user: user._id
     })
     await newBill.save();
-    const supplers = async () => {
+    const suppliers = async () => {
         await prods.forEach(p => {
             Prod.findById(p.prod)
         });

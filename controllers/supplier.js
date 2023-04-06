@@ -122,7 +122,7 @@ exports.removeProd = (req, res) => {
             return Prod.findById(prodId)
         })
         .then(p => {
-            p.supplers = p.supplers.filter(s => {
+            p.suppliers = p.suppliers.filter(s => {
                 return s != supId
             })
             return p.save();
