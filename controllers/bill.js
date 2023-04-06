@@ -15,7 +15,7 @@ exports.addNew = async (req, res) => {
     ]
     */
     const user = await User.findById(userId);
-    let suppliers = [];
+    // let suppliers = [];
     const newBill = new Bill({
         prods: prods,
         user: user._id
