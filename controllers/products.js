@@ -18,25 +18,37 @@ exports.getAllProds = (req, res) => {
 }
 exports.getProdsByCateg = (req, res) => {
     const name = req.params.name;
-    Categ.findOne({ name: name })
-        .populate("products")
-        .then(c => {
-            if (c) {
-                res.status(200).json({
-                    data: c.products
-                })
-            } else {
-                res.status(401).json({
-                    msg: "not found !"
-                })
-            }
+    Prod.find({category: name})
+    .then(prods=>{
+        res.status(200).json({
+            data: prods
         })
-        .catch(err => {
-            res.status(500).json({
-                msg: "server error",
-                error: err.message
-            })
+    })
+    .catch(err => {
+        res.status(500).json({
+            msg: "server error",
+            error: err.message
         })
+    })
+    // Categ.findOne({ name: name })
+    //     .populate("products")
+    //     .then(c => {
+    //         if (c) {
+    //             res.status(200).json({
+    //                 data: c.products
+    //             })
+    //         } else {
+    //             res.status(401).json({
+    //                 msg: "not found !"
+    //             })
+    //         }
+    //     })
+    //     .catch(err => {
+    //         res.status(500).json({
+    //             msg: "server error",
+    //             error: err.message
+    //         })
+    //     })
 }
 exports.getProdById = (req, res) => {
     const id = req.params.id;
@@ -144,7 +156,6 @@ exports.EditProd = (req, res) => {
                 p.category = category;
                 p.description = description;
                 p.details = details;
-
                 return p.save()
             } else {
                 return false;
