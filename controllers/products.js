@@ -18,18 +18,18 @@ exports.getAllProds = (req, res) => {
 }
 exports.getProdsByCateg = (req, res) => {
     const name = req.params.name;
-    Prod.find({category: name})
-    .then(prods=>{
-        res.status(200).json({
-            data: prods
+    Prod.find({ category: name })
+        .then(prods => {
+            res.status(200).json({
+                data: prods
+            })
         })
-    })
-    .catch(err => {
-        res.status(500).json({
-            msg: "server error",
-            error: err.message
+        .catch(err => {
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
         })
-    })
     // Categ.findOne({ name: name })
     //     .populate("products")
     //     .then(c => {
@@ -215,6 +215,55 @@ exports.removeProd = (req, res) => {
             res.status(200).json({
                 msg: "ok"
             })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
+        })
+}
+exports.removeCateg = (req, res) => {
+    const id = req.params.id;
+    Categ.findByIdAndRemove(id)
+        .then(c => {
+            return Prod.deleteMany({ category: c.name })
+        })
+        .then(c => {
+            res.status(200).json({
+                msg: "ok"
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                msg: "server error",
+                error: err.message
+            })
+        })
+}
+exports.editCateg = (req, res) => {
+    const id = req.params.id;
+    const name = req.body.name;
+    Categ.findById(id)
+        .then(c => {
+            Prod.find({ category: c.name })
+                .then(p => {
+                    p.forEach(p => {
+                        p.category = name
+                    })
+                    return p.save()
+                })
+                .then(p => {
+                    c.name = name
+                    return c.save()
+                })
+                .then(c => {
+                    res.status(200).json({
+                        msg: "ok"
+                    })
+                })
         })
         .catch(err => {
             console.log(err)
