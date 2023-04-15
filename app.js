@@ -27,6 +27,7 @@ const upload = multer({ storage: storage });
 app.post('/admin/add-new-category', upload.single('img'));
 app.post("/products/add-img/:id", upload.array('imgs'));
 app.post("/products/edit-prod/:pid", upload.array('imgs'));
+app.post("/products/edit-categ/:id", upload.single('img'));
 /********************************************************************************** */
 const store = new MongoDBStore({
     uri: dbUrl,

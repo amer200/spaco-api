@@ -256,7 +256,10 @@ exports.editCateg = (req, res) => {
                     return p.save()
                 })
                 .then(p => {
-                    c.name = name
+                    c.name = name;
+                    if (req.file) {
+                        c.img = req.file.img;
+                    }
                     return c.save()
                 })
                 .then(c => {

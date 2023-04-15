@@ -13,5 +13,6 @@ routes.get('/categs', prodController.getCategs);
 routes.post('/edit-prod/:pid', adminMiddelwares.isAdmin, categMiddlewares.isFind, prodMiddlewares.isValide, prodController.EditProd);
 routes.post('/remove-img/:pid', adminMiddelwares.isAdmin, prodController.removeImg);
 routes.get("/remove-prod/:id", adminMiddelwares.isAdmin, prodController.removeProd);
-routes.get('/remove-categ/:id',  prodController.removeCateg);
+routes.get('/remove-categ/:id', adminMiddelwares.isAdmin, prodController.removeCateg);
+routes.post('/edit-categ/:id', adminMiddelwares.isAdmin, prodController.editCateg);
 module.exports = routes
